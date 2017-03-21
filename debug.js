@@ -18,7 +18,7 @@ exports.debug = (data, status) => {
 
   if (process.env.DEBUG === 'true') {
     // create log file
-    console.log(data, (err) => {
+    console.log(data, (err) => {   //<---Flavio Code
       if (err) {
         return console.log(err);
       }
@@ -26,3 +26,26 @@ exports.debug = (data, status) => {
     console.log(data);
   }
 };
+
+//Start Flavio Code
+exports.verNumberInc = (currentVersionNumber, change) => {
+  const versionArray = currentVersionNumber.split('.');
+
+  for(let versionIndex in versionArray) {
+    versionArray[versionIndex] = parseInt(versionArray[versionIndex]);
+  }
+
+  if(change === 'major') {
+      versionArray[0] += 1;
+      versionArray[1] = 0;
+      versionArray[2] = 0;
+    } else if(change === 'minor') {
+      versionArray[1] += 1;
+      versionArray[2] = 0;
+    } else if(change === 'patch') {
+      versionArray[2] += 1;
+    }
+
+    return versionArray.join('.');
+}
+//End Flavio Code
